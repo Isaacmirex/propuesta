@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infografía de Viabilidad: Transformación Digital Logística</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        .kpi-card-content { flex-grow: 1; }
+        .source-link { color: #1E88E5; font-size: 0.75rem; text-decoration: none; }
+        .source-link:hover { text-decoration: underline; }
+        .detail-page { display: none; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Flecha global para volver (puede requerir 2 clics) -->
+    <button id="backToMain"
+            class="fixed top-4 left-4 z-50 bg-gray-700/80 hover:bg-gray-700 text-white px-3 py-2 rounded-lg flex items-center gap-2 shadow"
+            onclick="handleBack()">
+        ← <span class="hidden sm:inline">Volver</span>
+    </button>
+
+    <header class="bg-[#0B417A] text-white p-6 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl font-black">Estudio de Viabilidad: Transformación Digital Logística</h1>
+            <p class="mt-2 text-lg text-[#BBDEFB]">Una hoja de ruta hacia la eficiencia, el control y el crecimiento competitivo.</p>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto p-4 md:p-8">
+
+        <section class="text-center bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-[#0B417A] mb-4">La Oportunidad es Inmensa, el Riesgo es la Inacción</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-6">
+                El mercado de última milla en América Latina no solo está creciendo, se está transformando. Con una proyección de alcanzar los <strong>$43.66 mil millones para 2033</strong>
+                <a href="https://www.precedenceresearch.com/last-mile-delivery-market" target="_blank" class="source-link">[1]</a>,
+                las empresas que no se digitalicen no se estancan, retroceden.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-left">
+                    <p class="text-5xl md:text-7xl font-extrabold text-[#1E88E5]">$43.66 Mil Millones</p>
+                    <p class="text-xl font-semibold mt-2">Es el valor proyectado del mercado para 2033.</p>
+                    <p class="mt-4 text-gray-600">
+                        Este crecimiento (CAGR 15.60%) es impulsado por consumidores que exigen velocidad, visibilidad y sostenibilidad. La optimización de rutas con IA, una característica clave de nuestra propuesta, puede reducir costos hasta en un 20%
+                        <a href="https://www.forbes.com/sites/forbestechcouncil/2024/01/22/the-future-of-logistics-and-supply-chain-management-in-2024/" target="_blank" class="source-link">[5]</a>,
+                        un nivel de eficiencia inalcanzable para sistemas manuales.
+                    </p>
+                </div>
+                <div class="chart-container h-64 md:h-80">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#0B417A] mb-8">El Abismo Digital: Su Realidad Actual vs. el Futuro que Proponemos</h2>
+            <p class="max-w-3xl mx-auto text-lg text-center mb-10">La diferencia no es solo tecnológica, es estratégica. Se trata de pasar de reaccionar a los problemas a anticiparse a las oportunidades.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                    <h3 class="text-2xl font-bold text-red-800 mb-4">❌ Estado Actual: Operando a Ciegas</h3>
+                    <ul class="space-y-3 text-red-700">
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Consecuencia del "No CRM":</strong> Incapacidad para identificar clientes valiosos, lo que lleva a una pérdida de ingresos potenciales y a una alta tasa de abandono.</div></li>
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Consecuencia de "No Base de Datos":</strong> Decisiones basadas en la intuición en lugar de en datos, lo que resulta en una asignación ineficiente de recursos.</div></li>
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Consecuencia de "No Trazabilidad":</strong> Clientes frustrados, aumento de los costos de soporte para responder "¿dónde está mi paquete?" y daño a la reputación de la marca.</div></li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">✅ Futuro Digital: Control Total e Inteligencia de Negocio</h3>
+                    <ul class="space-y-3 text-green-700">
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Beneficio de la Plataforma Central:</strong> Una visión de 360° de su operación, permitiendo la optimización de rutas, la gestión proactiva de clientes y la identificación de nuevas oportunidades de negocio.</div></li>
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Beneficio de los Datos Estructurados:</strong> Transformar los datos en un activo estratégico. Analizar tendencias, predecir la demanda y tomar decisiones que impulsen la rentabilidad.</div></li>
+                        <li class="flex items-start"><span class="mr-2 mt-1">●</span><div><strong>Beneficio de la App Móvil:</strong> Ofrecer una experiencia de cliente premium que no solo retiene, sino que convierte a los clientes en promotores de su marca, impulsando el crecimiento orgánico.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#0B417A] mb-8">La Transformación Medible: Proyección de KPIs Clave</h2>
+            <p class="max-w-3xl mx-auto text-lg text-center mb-10">La inversión en tecnología se traduce en mejoras operativas y financieras tangibles. A continuación, se proyecta el impacto en los indicadores más importantes, que están interconectados: la eficiencia operativa impulsa la satisfacción del cliente, y la satisfacción del cliente impulsa la rentabilidad.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="kpi-card">
+                    <div class="kpi-card-content">
+                        <h3 class="text-lg font-bold text-[#0B417A]">Entregas a Tiempo</h3>
+                        <div class="chart-container h-48 mx-auto"><canvas id="otdChart"></canvas></div>
+                        <p class="mt-2 text-gray-600">Aumento de la fiabilidad y satisfacción del cliente.</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-content">
+                        <h3 class="text-lg font-bold text-[#0B417A]">Reducción de Costos</h3>
+                        <div class="chart-container h-48 mx-auto"><canvas id="costChart"></canvas></div>
+                        <p class="mt-2 text-gray-600">Optimización de rutas y menos tareas manuales.</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-content">
+                        <h3 class="text-lg font-bold text-[#0B417A]">Retención de Clientes</h3>
+                        <div class="chart-container h-48 mx-auto"><canvas id="retentionChart"></canvas></div>
+                        <p class="mt-2 text-gray-600">Una experiencia superior que fomenta la lealtad.</p>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-content">
+                        <h3 class="text-lg font-bold text-[#0B417A]">Net Promoter Score (NPS)</h3>
+                        <div class="chart-container h-48 mx-auto"><canvas id="npsChart"></canvas></div>
+                        <p class="mt-2 text-gray-600">De un servicio inconsistente a uno de alta calidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-center text-[#0B417A] mb-8">La Inversión Estratégica: Valor Excepcional en el Mercado Local</h2>
+            <p class="max-w-3xl mx-auto text-lg text-center mb-10">Nuestros paquetes ofrecen una ventaja competitiva única: acceso a talento y estrategia de nivel senior con una estructura de costos optimizada para el mercado ecuatoriano.</p>
+            <div class="grid md:grid-cols-5 gap-8 items-center">
+                <div class="md:col-span-2 text-left">
+                     <h3 class="text-2xl font-bold text-[#0B417A] mb-4">Paquete Recomendado vs. Mercado Ecuatoriano</h3>
+                     <p class="text-gray-600">Contratar un equipo similar en Ecuador costaría más de <strong>$5,300 mensuales</strong>. Nuestro paquete integral "PO + Desarrollo" de <strong>$2,500</strong> ofrece ambos roles, gestionados y alineados, con un ahorro superior al 50%, eliminando riesgos de contratación y acelerando resultados.</p>
+                     <button onclick="showDetail('detail-salaries')" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Ver Análisis Salarial Detallado</button>
+                </div>
+                <div class="md:col-span-3 chart-container h-80">
+                    <canvas id="costComparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#0B417A] text-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold text-center mb-8">El Retorno de la Inversión (ROI): Viabilidad Financiera Comprobada</h2>
+            <p class="max-w-3xl mx-auto text-lg text-center text-[#BBDEFB] mb-10">La pregunta no es si puede permitirse esta inversión, sino si puede permitirse no hacerla. Incluso en un escenario moderado, el proyecto no solo se paga a sí mismo, sino que genera un retorno positivo significativo a partir del segundo año, demostrando un caso de negocio sólido.</p>
+            <div class="bg-[#1E88E5] p-6 rounded-lg">
+                <div class="chart-container h-96">
+                    <canvas id="roiChart"></canvas>
+                </div>
+            </div>
+             <div class="text-center mt-6">
+                <p class="text-lg">La adopción del Paquete 2 posiciona a la empresa para capitalizar el crecimiento del sector y construir un negocio digital resiliente y competitivo.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detail interna de esta página -->
+    <div id="detail-pages-container">
+        <section id="detail-salaries" class="detail-page container mx-auto px-6 py-16">
+            <button onclick="showMain('main-content')" class="mb-8 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg">&larr; Volver a la Infografía</button>
+            <h2 class="text-4xl font-bold text-center text-[#0B417A] mb-4">Análisis Comparativo de Salarios</h2>
+            <p class="text-xl text-center text-gray-600 mb-12">Nuestra propuesta de valor se fundamenta en ofrecer talento de clase mundial a un costo optimizado para el mercado local.</p>
+
+            <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-[#0B417A] mb-6">Desglose Salarial: Ecuador vs. Mercados Globales</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-4 font-bold">Rol</th>
+                                <th class="p-4 font-bold">Salario Mensual (Ecuador)</th>
+                                <th class="p-4 font-bold">Salario Mensual (LatAm Remoto)</th>
+                                <th class="p-4 font-bold">Salario Mensual (EE.UU.)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr>
+                                <td class="p-4">Product Owner Senior</td>
+                                <td class="p-4 font-semibold text-lg">$3,206 <a href="https://www.glassdoor.com/Salaries/ecuador-product-owner-salary-SRCH_IL.0,7_IN65_KO8,22.htm" target="_blank" class="source-link">[3]</a></td>
+                                <td class="p-4">$4,500+ <a href="https://www.glassdoor.com/Salaries/latin-america-product-owner-salary-SRCH_IL.0,13_IN13_KO14,28.htm" target="_blank" class="source-link">[4]</a></td>
+                                <td class="p-4">$11,000+ <a href="https://www.glassdoor.com/Salaries/us-product-owner-salary-SRCH_IL.0,2_IN1_KO3,17.htm" target="_blank" class="source-link">[6]</a></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Full Stack Developer (Mid-Senior)</td>
+                                <td class="p-4 font-semibold text-lg">$2,100 <a href="https://www.glassdoor.com/Salaries/ecuador-full-stack-developer-salary-SRCH_IL.0,7_IN65_KO8,29.htm" target="_blank" class="source-link">[2]</a></td>
+                                <td class="p-4">$5,000+ <a href="https://www.arc.dev/remote-salary/full-stack-developer/latin-america" target="_blank" class="source-link">[8]</a></td>
+                                <td class="p-4">$7,000+ <a href="https://www.glassdoor.com/Salaries/us-full-stack-developer-salary-SRCH_IL.0,2_IN1_KO3,24.htm" target="_blank" class="source-link">[7]</a></td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="p-4 font-bold">Costo Total del Equipo (PO + Dev)</td>
+                                <td class="p-4 font-bold text-xl text-red-600">$5,306</td>
+                                <td class="p-4 font-bold text-xl text-red-600">$9,500+</td>
+                                <td class="p-4 font-bold text-xl text-red-600">$18,000+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-center text-[#0B417A] mb-6">Visualización de la Ventaja Competitiva</h3>
+                <div class="chart-container h-96">
+                    <canvas id="salariesChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center p-6 mt-8">
+        <p class="text-gray-500">&copy; 2025 Propuesta de Transformación Digital. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        /* ------- LÓGICA DOBLE CLIC PARA REGRESAR ------- */
+        let backClicks = 0;
+
+        function handleBack() {
+            // ¿Algún detail interno visible?
+            const anyDetailVisible = Array.from(document.querySelectorAll('.detail-page'))
+                .some(p => p.style.display === 'block');
+
+            if (backClicks === 0 && anyDetailVisible) {
+                // Primer clic: cerrar detail y volver al main interno
+                showMain('main-content');
+                backClicks++;
+                return;
+            }
+
+            // Segundo clic (o primero si no había detail): volver a la página principal
+            window.location.href = 'index.html#propuesta';
+        }
+        /* ----------------------------------------------- */
+
+        const chartTooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    labels: { color: '#333' }
+                }
+            },
+            maintainAspectRatio: false,
+            responsive: true
+        };
+
+        const chartTooltipCallbackDark = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    labels: { color: '#FFFFFF' }
+                }
+            },
+            maintainAspectRatio: false,
+            responsive: true
+        };
+
+        const mainContent = document.getElementById('main-content');
+        const detailPagesContainer = document.getElementById('detail-pages-container');
+        const detailPages = detailPagesContainer.querySelectorAll('.detail-page');
+        let salariesChartInstance = null;
+
+        function showDetail(detailId) {
+            mainContent.style.display = 'none';
+            detailPages.forEach(page => page.style.display = 'none');
+            const pageToShow = document.getElementById(detailId);
+            if (pageToShow) {
+                pageToShow.style.display = 'block';
+                window.scrollTo(0, 0);
+                // Reinicia la lógica de doble clic cuando entras a un detail
+                backClicks = 0;
+                if (detailId === 'detail-salaries') {
+                    renderSalariesChart();
+                }
+            }
+        }
+
+        function showMain(sectionId) {
+            detailPages.forEach(page => page.style.display = 'none');
+            mainContent.style.display = 'block';
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function renderSalariesChart() {
+            const ctx = document.getElementById('salariesChart').getContext('2d');
+            if (salariesChartInstance) {
+                salariesChartInstance.destroy();
+            }
+            salariesChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Product Owner', 'Full Stack Developer', 'Equipo Combinado'],
+                    datasets: [
+                        { label: 'Ecuador', data: [3206, 2100, 5306], backgroundColor: '#1E88E5' },
+                        { label: 'LatAm Remoto', data: [4500, 5000, 9500], backgroundColor: '#64B5F6' },
+                        { label: 'EE.UU.', data: [11000, 7000, 18000], backgroundColor: '#BBDEFB' }
+                    ]
+                },
+                options: {
+                    ...chartTooltipCallback,
+                    scales: {
+                        y: { ticks: { color: '#333', callback: v => '$' + v } },
+                        x: { ticks: { color: '#333' } }
+                    }
+                }
+            });
+        }
+
+        // Gráficas
+        new Chart(document.getElementById('marketGrowthChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024', '2029', '2033'],
+                datasets: [{
+                    label: 'Crecimiento del Mercado ($B)',
+                    data: [11.85, 25.75, 43.66],
+                    backgroundColor: 'rgba(30, 136, 229, 0.2)',
+                    borderColor: '#1E88E5',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: { ...chartTooltipCallback, scales: { y: { ticks: { color: '#333' } }, x: { ticks: { color: '#333' } } } }
+        });
+
+        new Chart(document.getElementById('otdChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Mejora', 'Base Actual'],
+                datasets: [{ data: [15, 75], backgroundColor: ['#1E88E5', '#BBDEFB'], hoverOffset: 4 }]
+            },
+            options: { ...chartTooltipCallback, plugins: { ...chartTooltipCallback.plugins, legend: { display: false } }, cutout: '60%' }
+        });
+
+        new Chart(document.getElementById('costChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Reducción', 'Costo Restante'],
+                datasets: [{ data: [15, 85], backgroundColor: ['#1E88E5', '#BBDEFB'], hoverOffset: 4 }]
+            },
+            options: { ...chartTooltipCallback, plugins: { ...chartTooltipCallback.plugins, legend: { display: false } }, cutout: '60%' }
+        });
+
+        new Chart(document.getElementById('retentionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Mejora', 'Base Actual'],
+                datasets: [{ data: [15, 60], backgroundColor: ['#1E88E5', '#BBDEFB'], hoverOffset: 4 }]
+            },
+            options: { ...chartTooltipCallback, plugins: { ...chartTooltipCallback.plugins, legend: { display: false } }, cutout: '60%' }
+        });
+
+        new Chart(document.getElementById('npsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['NPS Antes', 'NPS Después'],
+                datasets: [{
+                    label: 'Net Promoter Score',
+                    data: [10, 50],
+                    backgroundColor: ['#BBDEFB', '#1E88E5'],
+                    barThickness: 50
+                }]
+            },
+            options: { ...chartTooltipCallback, indexAxis: 'y', plugins: { ...chartTooltipCallback.plugins, legend: { display: false } }, scales: { y: { ticks: { color: '#333' } }, x: { ticks: { color: '#333' } } } }
+        });
+
+        new Chart(document.getElementById('costComparisonChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Costo Mensual del Equipo'],
+                datasets: [
+                    { label: 'Paquete Recomendado', data: [2500], backgroundColor: '#1E88E5' },
+                    { label: 'Costo Mercado Ecuador', data: [5300], backgroundColor: '#64B5F6' }
+                ]
+            },
+            options: { ...chartTooltipCallback, scales: { y: { ticks: { color: '#333', callback: v => '$' + v } }, x: { ticks: { color: '#333' } } } }
+        });
+
+        new Chart(document.getElementById('roiChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Año 1', 'Año 2', 'Año 3'],
+                datasets: [
+                    { label: 'ROI Conservador (%)', data: [-24, 11, 49], backgroundColor: '#BBDEFB' },
+                    { label: 'ROI Moderado (%)', data: [19, 105, 194], backgroundColor: '#64B5F6' },
+                    { label: 'ROI Optimista (%)', data: [112, 457, 816], backgroundColor: '#FFFFFF' }
+                ]
+            },
+            options: {
+                ...chartTooltipCallbackDark,
+                scales: {
+                    y: { ticks: { color: '#FFFFFF', callback: v => v + '%' }, grid: { color: 'rgba(255, 255, 255, 0.2)' } },
+                    x: { ticks: { color: '#FFFFFF' }, grid: { color: 'rgba(255, 255, 255, 0.2)' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
